@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy New Year</title>
+  <style>
+    /* Body Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: radial-gradient(circle, #1e3c72, #2a5298, #1e3c72);
+      overflow: hidden;
+      color: white;
+    }
+
+    /* Text Styling */
+    h1 {
+      font-size: 4rem;
+      text-align: center;
+      text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.8);
+      animation: glow 2s infinite;
+    }
+
+    h1 span {
+      font-size: 1.5rem;
+      display: block;
+      margin-top: 10px;
+      font-style: italic;
+      color: #ffdf91;
+      text-shadow: 2px 2px 15px rgba(255, 223, 145, 0.9);
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 2px 2px 20px rgba(255, 255, 255, 0.8),
+                     0 0 30px rgba(255, 200, 200, 0.6),
+                     0 0 50px rgba(255, 100, 100, 0.4);
+      }
+      50% {
+        text-shadow: 2px 2px 25px rgba(255, 255, 255, 1),
+                     0 0 40px rgba(255, 200, 200, 0.8),
+                     0 0 60px rgba(255, 100, 100, 0.6);
+      }
+    }
+
+    /* Fireworks Spark Styling */
+    .spark {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: radial-gradient(circle, white, transparent);
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>
+    🎉 Happy New Year 2025! 🎆
+    <span>Wishing you joy, success, and endless celebrations!</span>
+  </h1>
+
+  <script>
+    // Function to create fireworks
+    function createFirework() {
+      const fireworkContainer = document.createElement('div');
+      fireworkContainer.className = 'firework-container';
+      fireworkContainer.style.position = 'absolute';
+      fireworkContainer.style.left = Math.random() * 100 + 'vw';
+      fireworkContainer.style.top = Math.random() * 50 + 'vh';
+      document.body.appendChild(fireworkContainer);
+
+      // Create multiple sparks for the firework
+      for (let i = 0; i < 30; i++) {
+        const spark = document.createElement('div');
+        spark.classList.add('spark');
+
+        // Randomize spark direction and distance
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 150 + 50;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+
+        spark.style.setProperty('--x', `${x}px`);
+        spark.style.setProperty('--y', `${y}px`);
+
+        fireworkContainer.appendChild(spark);
+
+        // Remove sparks after animation
+        setTimeout(() => spark.remove(), 1000);
+      }
+
+      // Remove the firework container after animation
+      setTimeout(() => fireworkContainer.remove(), 1000);
+    }
+
+    // Launch fireworks at intervals
+    setInterval(createFirework, 800);
+
+    // Run fireworks on load
+    window.onload = () => {
+      createFirework();
+    };
+  </script>
+</body>
+</html>
